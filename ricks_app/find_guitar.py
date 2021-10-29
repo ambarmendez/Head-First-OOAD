@@ -20,14 +20,15 @@ def main():
 
     # Erin is looking for an Fender 'Strat' guitar, made of Alder
     what_erin_likes = Guitar('', 0, Builder.FENDER, 'Stratocastor', Type.ELECTRIC, Wood.ALDER, Wood.ALDER)
-    guitar = inventory.search(what_erin_likes)
+    matching_guitars = inventory.search(what_erin_likes)
 
-    if guitar:
-        print('Erin, you might like this ', end='')
-        print(
-            '{} {} {} guitar:\n{} back and sides, \n{} top.\nYou can have it for only ${}!'
-            .format(guitar.builder, guitar.model, guitar.type, guitar.backwood, guitar.topwood, guitar.price)
-        )
+    if matching_guitars:
+        print('Erin, you might like these guitars: ')
+        for guitar in matching_guitars:
+            print(
+                'We have a {} {} {} guitar:\n\t{} back and sides, \n\t{} top.\nYou can have it for only ${}!\n---'
+                .format(guitar.builder, guitar.model, guitar.type, guitar.backwood, guitar.topwood, guitar.price)
+            )
     else:
         print('Sorry, Erin, we have nothing for you.')
 

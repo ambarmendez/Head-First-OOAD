@@ -22,6 +22,7 @@ class Inventory:
         ''' It takes in a client's ideal guitar, and returns a guitar from Rick's Inventory
         that matches up with the client's spec.
         '''
+        matching_guitars = []
         for guitar in self.guitars:
             if search_guitar.builder != guitar.builder:
                 continue
@@ -33,4 +34,6 @@ class Inventory:
                 continue
             if search_guitar.topwood != guitar.topwood:
                 continue
-        return None
+            matching_guitars.append(guitar)
+
+        return matching_guitars
