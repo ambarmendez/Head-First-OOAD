@@ -23,14 +23,14 @@ class Inventory:
         that matches up with the client's spec.
         '''
         for guitar in self.guitars:
-            if not search_guitar.builder and search_guitar.builder != guitar.builder:
+            if search_guitar.builder != guitar.builder:
                 continue
-            if not search_guitar.model and search_guitar.model != guitar.model:
+            if not search_guitar.model and search_guitar.model.lower() != guitar.model.lower():
                 continue
-            if not search_guitar.type and search_guitar.type != guitar.type:
+            if search_guitar.type != guitar.type:
                 continue
-            if not search_guitar.backwood and search_guitar.backwood != guitar.backwood:
+            if search_guitar.backwood != guitar.backwood:
                 continue
-            if not search_guitar.topwood and search_guitar.topwood != guitar.topwood:
+            if search_guitar.topwood != guitar.topwood:
                 continue
         return None
