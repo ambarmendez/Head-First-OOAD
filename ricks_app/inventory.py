@@ -24,16 +24,7 @@ class Inventory:
         '''
         matching_guitars = []
         for guitar in self.guitars:
-            if search_spec.builder != guitar.guitar_spec.builder:
-                continue
-            if not search_spec.model and search_spec.model.lower() != guitar.guitar_spec.model.lower():
-                continue
-            if search_spec.type != guitar.guitar_spec.type:
-                continue
-            if search_spec.backwood != guitar.guitar_spec.backwood:
-                continue
-            if search_spec.topwood != guitar.guitar_spec.topwood:
-                continue
-            matching_guitars.append(guitar)
+            if guitar.guitar_spec == search_spec:
+                matching_guitars.append(guitar)
 
         return matching_guitars

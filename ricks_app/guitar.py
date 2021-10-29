@@ -50,16 +50,36 @@ class GuitarSpec:
     '''
     Client's specifications for the ideal guitar
     '''
-    def __init__(self, builder, model, type, backwood, topwood):
+    def __init__(self, num_strings, builder, model, type, backwood, topwood):
         ''' It receives a set of general specifications that clients are
         interested in finding in their ideal guitar: the woods used, or
         the type of guitar, or a particular builder or model.
         '''
+        self.num_strings = num_strings
         self.builder = builder
         self.model = model
         self.type = type
         self.backwood = backwood
         self.topwood = topwood
+
+    def __eq__(self, obj):
+        ''' It compare two GuitarSpec instances. It returns True if two
+        GuitarSpec objects have the same builder, model, type, backwood
+        and topwood.
+        '''
+        if not isinstance(obj, GuitarSpec):
+            return False
+        if obj.builder != self.builder:
+            return False
+        if not obj.model and obj.model.lower() != self.model.lower():
+            return False
+        if obj.type != self.type:
+            return False
+        if obj.backwood != self.backwood:
+            return False
+        if obj.topwood != self.topwood:
+            return False
+        return True
 
 
 class Guitar:
