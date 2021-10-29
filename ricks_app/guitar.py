@@ -44,19 +44,34 @@ class Wood(Enum):
             return 'Alder'
         if self.value == 5:
             return 'Sitka'
-            
 
-class Guitar:
-    ''' Each guitar in Rick's inventory is represented by an instance of this class '''
-    def __init__(self, serial_number, price, builder, model, type, backwood, topwood):
-        ''' Defining characteristics of a guitar: the serial number, how much does it
-        costs, the builder and the model, what type it is (acoustic or electric), and
-        what woods are used in the guitar.
+
+class GuitarSpec:
+    '''
+    Client's specifications for the ideal guitar
+    '''
+    def __init__(self, builder, model, type, backwood, topwood):
+        ''' It receives a set of general specifications that clients are
+        interested in finding in their ideal guitar: the woods used, or
+        the type of guitar, or a particular builder or model.
         '''
-        self.serial_number = serial_number
-        self.price = price
         self.builder = builder
         self.model = model
         self.type = type
         self.backwood = backwood
         self.topwood = topwood
+
+
+class Guitar:
+    '''
+    Each guitar in Rick's inventory is represented by an instance of this class
+    '''
+    def __init__(self, serial_number, price, guitar_spec):
+        ''' Define all the characteristics of a guitar:
+        - Properties that are unique to each particular guitar: the serial number and
+        how much does it costs.
+        - Some other general specifications.
+        '''
+        self.serial_number = serial_number
+        self.price = price
+        self.guitar_spec = guitar_spec
