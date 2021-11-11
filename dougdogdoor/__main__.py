@@ -26,7 +26,7 @@ while t:
 print("...but he's stuck outside!")
 
 # Simulate the hardware hearing a bark again
-print('Fido starts barkig...')
+print('\nFido starts barkig...')
 recognizer.recognize('Woof')
 
 print("\nFido's back inside...")

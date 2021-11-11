@@ -23,6 +23,3 @@ class Remote:
             self.door.close()
         else:
             self.door.open()
-
-            t = threading.Timer(5, self.door.close)
-            t.start()

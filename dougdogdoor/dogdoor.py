@@ -1,3 +1,6 @@
+import threading
+
+
 class DogDoor:
     '''
     Interface with Doug's custom door hardware, which means it will control
@@ -9,6 +12,9 @@ class DogDoor:
     def open(self):
         print('The dog door opens.')
         self.state = True
+
+        t = threading.Timer(5, self.close)
+        t.start()
 
     def close(self):
         print('The dog door closes.')
