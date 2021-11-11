@@ -9,26 +9,41 @@ from .dogdoor import DogDoor
 from .remote import Remote
 
 
-door = DogDoor(Bark('Woof'))
+door = DogDoor()
+door.add_allowed_bark(Bark('rowlf'))
+door.add_allowed_bark(Bark('rooowlf'))
+door.add_allowed_bark(Bark('rawlf'))
+door.add_allowed_bark(Bark('woof'))
+
 recognizer = BarkRecognizer(door)
 remote = Remote(door)
 
 # Simulate the hardware hearing a bark
 print('Bruce starts barking.')
-recognizer.recognize(Bark('Woof'))
+recognizer.recognize(Bark('rowlf'))
 
 print('\nBruce has gone outside...')
-print("\nBruce's all done...")
 
 t = 10
 while t:
     time.sleep(1)
     t -= 1
 
+print("\nBruce's all done...")
 print("...but he's stuck outside!")
 
+# Simulate the hardware hearing a bark (not Bruce!)
+small_dog_bark = Bark('yip')
+print('Bitsie dog starts barking.')
+recognizer.recognize(small_dog_bark)
+
+t = 5
+while t:
+    time.sleep(1)
+    t -= 1
+
 # Simulate the hardware hearing a bark again
-print('\nBruce starts barking...')
-recognizer.recognize(Bark('Woof'))
+print('Bruce starts barking...')
+recognizer.recognize(Bark('rooowlf'))
 
 print("\nBruce's back inside...")

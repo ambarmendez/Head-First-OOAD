@@ -13,7 +13,9 @@ class BarkRecognizer:
         Bark instance
         '''
         print('\tBarkRecognizer: Heard a "{}"'.format(bark.sound))
-        if self.door.allowed_bark == bark:
-            self.door.open()
-        else:
-            print('This dog is not allowed.')
+        for allowed_bark in self.door.allowed_barks:
+            if allowed_bark == bark:
+                self.door.open()
+                return
+
+        print('This dog is not allowed.')
