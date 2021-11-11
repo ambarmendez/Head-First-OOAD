@@ -9,8 +9,11 @@ class BarkRecognizer:
 
     def recognize(self, bark):
         '''
-        Every time the hardware hears a bark, it will call this method with the
-        sound of the bark instead
+        Every time the hardware hears a bark, it will call this method with a
+        Bark instance
         '''
-        print('\tBarkRecognizer: Heard a "{}"'.format(bark))
-        self.door.open()
+        print('\tBarkRecognizer: Heard a "{}"'.format(bark.sound))
+        if self.door.allowed_bark == bark:
+            self.door.open()
+        else:
+            print('This dog is not allowed.')
