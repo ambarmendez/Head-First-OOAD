@@ -3,14 +3,17 @@ It simulates what happens on the alternate path
 '''
 import time
 
+from .barkrecognizer import BarkRecognizer
 from .dogdoor import DogDoor
 from .remote import Remote
 
 door = DogDoor()
+recognizer = BarkRecognizer(door)
 remote = Remote(door)
 
-print('Fido barks to go outside...')
-remote.press_button()
+# Simulate the hardware hearing a bark
+print('Fido starts barking.')
+recognizer.recognize('Woof')
 
 print('\nFido has gone outside...')
 print("\nFido's all done...")
@@ -21,9 +24,9 @@ while t:
     t -= 1
 
 print("...but he's stuck outside!")
-print('\nFido starts barkig...')
 
-print('...so Gina grabs the remote control.')
-remote.press_button()
+# Simulate the hardware hearing a bark again
+print('Fido starts barkig...')
+recognizer.recognize('Woof')
 
 print("\nFido's back inside...")
