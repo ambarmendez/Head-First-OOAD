@@ -3,15 +3,15 @@
     and he runs a search on his inventory.
 '''
 from inventory import Inventory
-from guitar import Guitar, GuitarSpec, Builder, Type, Wood
+from instrument import Guitar, GuitarSpec, Builder, Type, Wood
 
 
 def initialize_inventory(inventory):
     ''' set up Rick's guitar inventory '''
-    inventory.add_guitar('A4565767', 2541.23, GuitarSpec(4, Builder.GIBSON, 'DE-5', Type.ACOUSTIC, Wood.MAHOGANY, Wood.INDIAN_ROSEWOOD))
-    inventory.add_guitar('V95693', 1499.95, GuitarSpec(6, Builder.FENDER, 'Stratocastor', Type.ELECTRIC, Wood.ALDER, Wood.ALDER))
-    inventory.add_guitar('sr112233', 5687.53, GuitarSpec(12, Builder.MARTIN, 'mo-98', Type.ELECTRIC, Wood.BRAZILIAN_ROSEWOOD, Wood.ALDER))
-    inventory.add_guitar('V9512', 1549.95, GuitarSpec(4, Builder.FENDER, 'Stratocastor', Type.ELECTRIC, Wood.ALDER, Wood.ALDER))
+    inventory.add_instrument('A4565767', 2541.23, GuitarSpec(4, Builder.GIBSON, 'DE-5', Type.ACOUSTIC, Wood.MAHOGANY, Wood.INDIAN_ROSEWOOD))
+    inventory.add_instrument('V95693', 1499.95, GuitarSpec(6, Builder.FENDER, 'Stratocastor', Type.ELECTRIC, Wood.ALDER, Wood.ALDER))
+    inventory.add_instrument('sr112233', 5687.53, GuitarSpec(12, Builder.MARTIN, 'mo-98', Type.ELECTRIC, Wood.BRAZILIAN_ROSEWOOD, Wood.ALDER))
+    inventory.add_instrument('V9512', 1549.95, GuitarSpec(4, Builder.FENDER, 'Stratocastor', Type.ELECTRIC, Wood.ALDER, Wood.ALDER))
 
 
 def main():
@@ -28,12 +28,12 @@ def main():
             print(
                 'We have a {} {} {}-strings {} guitar:\n\t{} back and sides, \n\t{} top.\nYou can have it for only ${}!\n---'
                 .format(
-                    guitar.guitar_spec.builder,
-                    guitar.guitar_spec.model,
-                    guitar.guitar_spec.num_strings,
-                    guitar.guitar_spec.type,
-                    guitar.guitar_spec.backwood,
-                    guitar.guitar_spec.topwood,
+                    guitar.spec.builder,
+                    guitar.spec.model,
+                    guitar.spec.num_strings,
+                    guitar.spec.type,
+                    guitar.spec.backwood,
+                    guitar.spec.topwood,
                     guitar.price)
             )
     else:
