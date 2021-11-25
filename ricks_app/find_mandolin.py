@@ -3,7 +3,7 @@
     and he runs a search on his inventory.
 '''
 from inventory import Inventory
-from instrument import Mandolin, MandolinSpec, Builder, Type, Style, Wood
+from instrument import MandolinSpec, Builder, Type, Style, Wood
 
 
 def initialize_inventory(inventory):

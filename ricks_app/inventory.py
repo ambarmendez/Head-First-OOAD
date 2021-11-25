@@ -1,5 +1,5 @@
-from instrument import Instrument, InstrumentSpec, Guitar
-from instrument import GuitarSpec, MandolinSpec, Mandolin
+from instrument import Instrument, InstrumentSpec
+from instrument import GuitarSpec, MandolinSpec
 
 class Inventory:
     def __init__(self):
@@ -10,11 +10,7 @@ class Inventory:
         instance, creates a Guitar or Mandolin object, and adds it to the Rick's
         inventory
         '''
-        instrument = None
-        if isinstance(spec, GuitarSpec):
-            instrument = Guitar(serial_number, price, spec)
-        elif isinstance(spec, MandolinSpec):
-            instrument = Mandolin(serial_number, price, spec)
+        instrument = Instrument(serial_number, price, spec)
         self.instruments.append(instrument)
 
     def get(serial_number):

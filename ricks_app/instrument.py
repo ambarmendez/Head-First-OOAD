@@ -1,4 +1,3 @@
-from abc import ABC
 from enum import Enum
 
 
@@ -51,9 +50,6 @@ class Style(Enum):
     A = 1
     F = 2
 
-    def describe(self):
-        return self.name, self.value
-
     def __str__(self):
         if self.value == 1:
             return 'A'
@@ -62,7 +58,7 @@ class Style(Enum):
 
 
 class InstrumentSpec:
-    ''' It is an abstract base class for GuitarSpec and MandolinSpec, it has all
+    ''' It is a base class for GuitarSpec and MandolinSpec, it has all
         the common specifications for both
     '''
     def __init__(self, builder, model, type, backwood, topwood):
@@ -143,34 +139,11 @@ class MandolinSpec(InstrumentSpec):
         return True
 
 
-class Instrument(ABC):
-    ''' It is a base class for Guitar and Mandolin, it has all the attributes
-        and operations that are common to both. There is no such thing as an
-        actual "instrument". Currently, instrument has no behaviour outside of
-        its subclasses. '''
+class Instrument:
+    ''' It is a class any string instrument, it has all the attributes
+        and operations that are common to both. The behaviuor of each
+        instrument doesn't vary. '''
     def __init__(self, serial_number, price, instrument_spec):
         self.serial_number = serial_number
         self.price = price
         self.spec = instrument_spec
-
-
-class Guitar(Instrument):
-    '''
-    Each guitar in Rick's inventory is represented by an instance of this class
-    '''
-    def __init__(self, serial_number, price, guitar_spec):
-        ''' Define all the characteristics of a guitar:
-        - Properties that are unique to each particular guitar: the serial number and
-        how much does it costs.
-        - Some other general specifications.
-        '''
-        super().__init__(serial_number, price, guitar_spec)
-
-
-class Mandolin(Instrument):
-    ''' Each mandolin in Rick's inventory is represented by an instance of this class '''
-    def __init__(self, serial_number, price, mandolin_spec):
-        ''' Defining characteristics that makes a unique mandolin: the serial number,
-        how much does it costs plus some other general specifications
-        '''
-        super().__init__(serial_number, price, mandolin_spec)
