@@ -61,7 +61,7 @@ class Style(Enum):
             return 'F'
 
 
-class InstrumentSpec(ABC):
+class InstrumentSpec:
     ''' It is an abstract base class for GuitarSpec and MandolinSpec, it has all
         the common specifications for both
     '''
@@ -173,4 +173,4 @@ class Mandolin(Instrument):
         ''' Defining characteristics that makes a unique mandolin: the serial number,
         how much does it costs plus some other general specifications
         '''
-        super().__init__(serial_number, price, mandolin_spec)        
+        super().__init__(serial_number, price, mandolin_spec)

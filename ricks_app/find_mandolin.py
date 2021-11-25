@@ -19,7 +19,7 @@ def main():
     initialize_inventory(inventory)
 
     specifications = MandolinSpec(Builder.FENDER, 'Stratocastor', Type.ELECTRIC, Style.A, Wood.ALDER, Wood.ALDER)
-    matching_mandolins = inventory.search_mandolins(specifications)
+    matching_mandolins = inventory.search(specifications)
 
     if matching_mandolins:
         print('You might like these guitars: ')
