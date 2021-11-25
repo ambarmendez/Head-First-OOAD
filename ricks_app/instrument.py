@@ -16,7 +16,7 @@ class Builder(Enum):
     FENDER = 1
     MARTIN = 2
     GIBSON = 3
-
+    COLLINGS = 4
     def __str__(self):
         if self.value == 1:
             return 'Fender'
@@ -24,6 +24,8 @@ class Builder(Enum):
             return 'Martin'
         if self.value == 3:
             return 'Gibson'
+        if self.value == 4:
+            return 'Collings'
 
 
 class Wood(Enum):
@@ -32,6 +34,8 @@ class Wood(Enum):
     MAHOGANY = 3
     ALDER = 4
     SITKA = 5
+    MAPLE = 6
+    ADIRONDACK = 7
 
     def __str__(self):
         if self.value == 1:
@@ -44,6 +48,10 @@ class Wood(Enum):
             return 'Alder'
         if self.value == 5:
             return 'Sitka'
+        if self.value == 6:
+            return 'Maple'
+        if self.value == 7:
+            return 'Adirondack'
 
 
 class Style(Enum):
@@ -57,86 +65,108 @@ class Style(Enum):
             return 'F'
 
 
+class InstrumentType(Enum):
+    ''' So far, these are the types of instruments that Rick sells '''
+    GUITAR = 1
+    BANJO = 2
+    DOBRO = 3
+    FIDDLE = 4
+    BASS = 5
+    MANDOLIN = 6
+
+    def __str__(self):
+        ''' String version of what it is '''
+        if self.value == 1:
+            return 'Guitar'
+        if self.value == 2:
+            return 'Banjo'
+        if self.value == 3:
+            return 'Dobro'
+        if self.value == 4:
+            return 'Fiddle'
+        if self.value == 5:
+            return 'Bass'
+        if self.value == 6:
+            return 'Mandolin'
+        return 'Unspecified'
+
+
 class InstrumentSpec:
-    ''' It is a base class for GuitarSpec and MandolinSpec, it has all
-        the common specifications for both
+    ''' It is a class for string instruments, it has all the general specifications
+        for the instruments
     '''
-    def __init__(self, builder, model, type, backwood, topwood):
+    def __init__(self, properties):
         ''' It receives a set of general and common specifications that clients
-        are interested in finding in their ideal instrument: the woods used, or
-        the type of guitar, or a particular builder or model.
+        are interested in finding in their ideal instrument.
         '''
-        self.builder = builder
-        self.model = model
-        self.type = type
-        self.backwood = backwood
-        self.topwood = topwood
+        if properties:
+            self.properties = dict(properties)
+        else:
+            self.properties = {}
 
     def __eq__(self, obj):
         ''' It compare two InstrumentSpec instances. It returns True if two
-        InstrumentSpec objects have the same builder, model, type, backwood
-        and topwood.
+        InstrumentSpec objects have the same properties.
         '''
         if not isinstance(obj, InstrumentSpec):
             return False
-        if obj.builder != self.builder:
-            return False
-        if not obj.model and obj.model.lower() != self.model.lower():
-            return False
-        if obj.type != self.type:
-            return False
-        if obj.backwood != self.backwood:
-            return False
-        if obj.topwood != self.topwood:
-            return False
+        for property, value in obj.properties.items():
+            if property not in self.properties or self.properties[property] != value:
+                return False
         return True
 
-
-class GuitarSpec(InstrumentSpec):
-    '''
-    Client's specifications for the ideal guitar
-    '''
-    def __init__(self, num_strings, builder, model, type, backwood, topwood):
-        ''' It receives a set of general specifications that clients are
-        interested in finding in their ideal guitar: the woods used, or
-        the type of guitar, or a particular builder or model.
-        '''
-        super().__init__(builder, model, type, backwood, topwood)
-        self.num_strings = num_strings
-
-    def __eq__(self, obj):
-        ''' It compare two GuitarSpec instances. It returns True if two
-        GuitarSpec objects have the same specifications plus amount of strings.
-        '''
-        if not super().__eq__(obj):
-            return False
-        if not isinstance(obj, GuitarSpec):
-            return False
-        if obj.num_strings != self.num_strings:
-            return False
-        return True
+    def get_property(self, property):
+        ''' It returns a property value, None when is not there '''
+        if property in self.properties:
+            return self.properties[property]
+        return None
 
 
-class MandolinSpec(InstrumentSpec):
-    ''' Client's specifications for the ideal guitar '''
-    def __init__(self, builder, model, tyype, style, backwood, topwood):
-        ''' It receives a set of general specifications that clients are
-        interested in finding in their ideal mandolin plus style.
-        '''
-        super().__init__(builder, model, tyype, backwood, topwood)
-        self.style = style
-
-    def __eq__(self, obj):
-        ''' It compare two MandolinSpec instances. It returns True if two
-        MandolinSpec objects have the same general specifications plus style.
-        '''
-        if not super().__eq__(obj):
-            return False
-        if not isinstance(obj, MandolinSpec):
-            return False
-        if obj.style != self.style:
-            return False
-        return True
+# class GuitarSpec(InstrumentSpec):
+#     '''
+#     Client's specifications for the ideal guitar
+#     '''
+#     def __init__(self, num_strings, builder, model, type, backwood, topwood):
+#         ''' It receives a set of general specifications that clients are
+#         interested in finding in their ideal guitar: the woods used, or
+#         the type of guitar, or a particular builder or model.
+#         '''
+#         super().__init__(builder, model, type, backwood, topwood)
+#         self.num_strings = num_strings
+#
+#     def __eq__(self, obj):
+#         ''' It compare two GuitarSpec instances. It returns True if two
+#         GuitarSpec objects have the same specifications plus amount of strings.
+#         '''
+#         if not super().__eq__(obj):
+#             return False
+#         if not isinstance(obj, GuitarSpec):
+#             return False
+#         if obj.num_strings != self.num_strings:
+#             return False
+#         return True
+#
+#
+# class MandolinSpec(InstrumentSpec):
+#     ''' Client's specifications for the ideal guitar '''
+#     def __init__(self, builder, model, tyype, style, backwood, topwood):
+#         ''' It receives a set of general specifications that clients are
+#         interested in finding in their ideal mandolin plus style.
+#         '''
+#         super().__init__(builder, model, tyype, backwood, topwood)
+#         self.style = style
+#
+#     def __eq__(self, obj):
+#         ''' It compare two MandolinSpec instances. It returns True if two
+#         MandolinSpec objects have the same general specifications plus style.
+#         '''
+#         if not super().__eq__(obj):
+#             return False
+#         if not isinstance(obj, MandolinSpec):
+#             return False
+#         if obj.style != self.style:
+#             return False
+#         return True
 
 
 class Instrument:

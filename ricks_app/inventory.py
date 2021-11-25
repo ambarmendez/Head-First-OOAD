@@ -1,5 +1,5 @@
 from instrument import Instrument, InstrumentSpec
-from instrument import GuitarSpec, MandolinSpec
+
 
 class Inventory:
     def __init__(self):
