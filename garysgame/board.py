@@ -2,6 +2,9 @@
 It handles the board itself, tiles, terrain, and other classes related to
 creating the actual board used in each game
 '''
+from units import Unit
+
+
 class Tile:
     def __init__(self):
         self.units = []
@@ -12,6 +15,12 @@ class Tile:
     def remove_unit(self, unit):
         self.units.pop()
 
+    def remove_units(self):
+        pass
+
+    def get_units(self):
+        return self.units
+        
 
 class Board:
     ''' Interface base that game designers can then use and extend to build their
@@ -62,3 +71,32 @@ class Board:
         ''' It returns all the units on a tile, given the X- and Y-position of
         the tile '''
         return self.get_tile(x, y).get_units()
+
+
+def scenario():
+    # Game designer creates board with a height and width
+    board = Board(5,6)
+
+    # Move tanks onto (4, 5)
+    board.add_unit(Unit(), 4, 5)
+
+    # Move army onto (4, 5)
+    board.add_unit(Unit(), 4, 5)
+
+    # Move artillery onto (4, 5)
+    board.get_units(4, 5)
+
+    # Request terrain at (4, 5)
+    board.get_tile(4, 5)
+
+    # Remove units from (4, 5)
+    board.remove_units(4, 5)
+
+    # Move subs to (2, 3)
+    board.add_unit(Unit(), 2, 2)
+
+    # Request terrain at (2, 2)
+    board.get_tile(2, 2)
+
+if __name__ == '__main__':
+    scenario()
