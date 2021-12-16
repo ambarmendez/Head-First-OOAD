@@ -4,9 +4,5 @@ It takes care of troops, armies, and all the units used in a game
 class Unit:
     ''' It support all types of units, with any number of different types of
     properties and attributes '''
-    def __init__(self, id):
-        self.type = ''
+    def __init__(self):
         self.properties = {}
-        self.id = id
-        self.name = ''
-        self.weapons = None
