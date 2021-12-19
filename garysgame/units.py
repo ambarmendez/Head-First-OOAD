@@ -35,7 +35,8 @@ class Unit:
         ''' Since properties might not be initialized, there is an extra check before
         looking up a property's value '''
         if self.properties is None:
-            return None
+            raise RuntimeError('No properties for this Unit.')
         if property in self.properties:
             return self.properties[property]
-        return None
+        else:
+            raise KeyError('Request for non-existent property.')

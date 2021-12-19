@@ -42,11 +42,12 @@ class UnitTester:
         ''' This shows that we're not just dealing with happy paths... it shows Unit deals
         with uses that are outside of the norm '''
         print("\nTesting getting a non-existent property's value.")
-        output_value = unit.get_property(property_name)
-        if output_value is None:
+        try:
+            output_value = unit.get_property(property_name)
+        except KeyError as e:
             print('Test passed')
-        else:
-            print('Test failed with value of', expected_output_value)
+            return
+        print('Test failed.')
 
 
 if __name__ == '__main__':
