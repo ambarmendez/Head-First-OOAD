@@ -40,3 +40,31 @@ class Unit:
             return self.properties[property]
         else:
             raise KeyError('Request for non-existent property.')
+
+
+class UnitGroup:
+    ''' It help to units can be grouped together into armies '''
+    def __init__(self, units=None):
+        ''' It creates a unit group by passing a list of units, and it uses a
+        key=value pair for retrieving an removing units by id'''
+        self.units = {}
+        for unit in units:
+            self.units[unit.id] = unit
+
+    def add_unit(self, unit):
+        self.units[unit.id] = unit
+
+    def remove(self, id):
+        del self.units[id]
+
+    def remove_unit(self, unit):
+        remove(unit.id)
+
+    def get_unit(self, id):
+        return self.units[id]
+
+    def get_units(self):
+        units = []
+        for unit_id in self.units:
+            units.append(self.units[unit_id])
+        return units
